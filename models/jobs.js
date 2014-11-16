@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
 		statement: DataTypes.STRING,
 		outDest: { type: DataTypes.STRING, allowNull: false },
 		jobID: { type: DataTypes.STRING, allowNull: false },
-		startDtTm: { type: DataTypes.DATETIME, allowNull: false },
+		startDtTm: { type: DataTypes.DATE, allowNull: false },
 		endDtTm: DataTypes.DATE
 	}, {
 		classMethods: {
