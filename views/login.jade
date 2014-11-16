@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	.container
+		form(class="form-signin" role="form")
+			h2.form-signin-heading Please Login
+			input(id="user" type="text" class="form-control" placeholder="Username" required autofocus)
+			input(id="pass" type="password" class="form-control" placeholder="Password" required)
+			button(id="login" class="btn btn-lg btn-primary btn-block" type="button") Submit
+	#errorPopup.modal.fade(role='dialog', tabindex='-1', aria-labeledby='errorLabel', aria-hidden='true')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') ×
+						span.sr-only Close
+					h4#errorLabel.modal-title Error:
+				#errorBody.modal-body
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+	script(src="js/clientLogin.js")

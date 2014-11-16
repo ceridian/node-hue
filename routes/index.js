@@ -1,9 +1,10 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
+var a = require('../lib/auth.js');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+router.get('/', a.checkAuth, function(req, res) {
+	console.log('following index route');
+	res.render('index', { title: 'Index'});
 });
 
 module.exports = router;
