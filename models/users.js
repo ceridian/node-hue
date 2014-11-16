@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
 	}, {
 		classMethods: {
 			associate: function(models){
-				USER.hasMany(models.JOB, {as: 'user'});
+				USER.hasMany(models.JOB, {as: 'user_id'});
 			}
 		}
 	});
