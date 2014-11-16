@@ -1,5 +1,6 @@
 var express = require('express');
 var router  = express.Router();
+var models = require('../models');
 
 router.get('/', function(req, res) {
 	console.log('get, /login');
@@ -13,7 +14,15 @@ router.post('/', function(req, res){
 	var pass = body.pass;
 	console.log('user: '+user);
 	console.log('pass: '+pass);
-	res.send('testting');
+	models.USER.findAll().complete(function(err, data){
+		if(err){
+			console.log(err);
+			res.send(err);
+		}else{
+			console.log(data);
+			res.send('testting');
+		}
+	});
 });
 
 module.exports = router;
