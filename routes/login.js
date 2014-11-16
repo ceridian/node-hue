@@ -14,20 +14,32 @@ router.post('/', function(req, res){
 	var pass = body.pass;
 	console.log('user: '+user);
 	console.log('pass: '+pass);
+	var load = {
+		status: null,
+		error: null,
+		user: null,
+	};
 	models.USER.find({where: { user: user}}).complete(function(err, data){
 		if(err){
 			console.log(err);
 			res.send(err);
 		}else{
 			if(data.length == 0){
-				res.send('Unknown User');
+				load.status = 'error';
+				load.error = 'Unknown User';
+				res.send(load);
 			}else{
 				var u = data.pass;
 				console.log(u);
 				if(u != pass){
-					res.send('Incorect Password');
+					load.status = 'error';
+					load.error = 'Incorect Password';
+					res.send(load);
 				}else{
-					res.send('ok');
+					req.session.user_id = user;
+					load.user = user;
+					load.status = 'ok';
+					res.send(load);
 				}
 			}
 		}

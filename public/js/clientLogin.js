@@ -11,10 +11,11 @@ $('#login').click(function(){
 		processData: false,
 		complete: function(data){
 			var res = data.responseText;
-			if(res == 'ok'){
+			var parsed = JSON.parse(res);
+			if(parsed.status == 'ok'){
 				window.location.replace('/');
 			}else{
-				$('#errorBody').html('<h4>'+res+'</h4>');
+				$('#errorBody').html('<h4>'+parsed.error+'</h4>');
 				$('#errorPopup').modal('show');
 			}
 		}
