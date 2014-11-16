@@ -4,12 +4,13 @@ var app = require('../app');
 var https = require('https');
 var models = require('../models');
 var fs = require('fs');
+var path = require('path');
 
 app.set('port', process.env.PORT || 443);
 
 var options = {
-	key: fs.readFileSync('server.key'),
-	cert: fs.readFileSync('server.crt')
+	key: fs.readFileSync(path.join(__dirname, 'server.key')),
+	cert: fs.readFileSync(path.join(__dirname, 'server.crt'))
 };
 
 models.sequelize.sync().complete(function(err){
