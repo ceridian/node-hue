@@ -19,11 +19,11 @@ router.post('/', function(req, res){
 			console.log(err);
 			res.send(err);
 		}else{
-			console.log(data);
 			if(data.length == 0){
 				res.send('Unknown User');
 			}else{
-				var u = data[0];
+				var u = data.pass;
+				console.log(u);
 				if(u != pass){
 					res.send('Incorect Password');
 				}else{
