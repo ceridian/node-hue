@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 var debug = require('debug')('launcher');
-var app = require('../app');
-var https = require('https');
-var models = require('../models');
 var fs = require('fs');
 var path = require('path');
+var https = require('https');
+var app = require('../app');
+var models = require('../models');
+var s = require('../lib/sockets.js');
 
 app.set('port', process.env.PORT || 443);
 
