@@ -8,6 +8,7 @@ var models = require('../models');
 var s = require('../lib/sockets.js');
 
 app.set('port', process.env.PORT || 443);
+app.set('DEBUG', '*');
 
 var options = {
 	key: fs.readFileSync(path.join(__dirname, 'server.key')),
