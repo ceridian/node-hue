@@ -15,3 +15,5 @@ router.post('/', function(req, res){
 	console.log('pass: '+pass);
 	res.send('testting');
 });
+
+module.exports = router;
