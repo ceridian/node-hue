@@ -8,12 +8,12 @@ module.exports = function(sequelize, DataTypes) {
 		jobID: { type: DataTypes.STRING, allowNull: false },
 		startDtTm: { type: DataTypes.DATETIME, allowNull: false },
 		endDtTm: DataTypes.DATE
-	});/*, {
+	}, {
 		classMethods: {
 			associate: function(models){
 				JOB.belongsTo(models.USER);
 			}
 		}
-	});*/
+	});
 	return JOB;
 };
