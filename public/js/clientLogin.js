@@ -12,6 +12,7 @@ $('#login').click(function(){
 		complete: function(data){
 			var res = data.responseText;
 			var parsed = JSON.parse(res);
+			console.log(parsed);
 			if(parsed.status == 'ok'){
 				window.location.replace('/');
 			}else{
