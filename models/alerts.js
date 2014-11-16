@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
 		from: { type: DataTypes.STRING, allowNull: false },
 		description: DataTypes.STRING,
 		ackBy: DataTypes.STRING,
-		ackTime: DataTypes.DATETIME
+		ackTime: DataTypes.DATE
 	});
 	return ALERT;
 };
