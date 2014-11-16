@@ -1,5 +1,25 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div
+    nav.navbar.navbar-inverse(role='navigation')
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            a.navbar-brand(href='#') Node-Hue
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  | Menu
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li
+                    p Reports
+                  li.divider
+                  li
+                    a(href='#', onclick='currentCounts()') Row Counts
+                  li.divider
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='#') #{ user }
