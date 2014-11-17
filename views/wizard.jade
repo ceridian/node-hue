@@ -23,10 +23,11 @@ block content
   .contain             
     form(role="form")
       .form-group
+        p(class="form-control-static") Select Address type
         .radio
           label
             input(type='radio' name='IPorName' id='setup_name' value='name')
-            | Hostname
+            | Host Name
         .radio
           label
             input(type='radio' name='IPorName' id='setup_ip' value='ip')
@@ -34,4 +35,5 @@ block content
       .form-group
         label(for="hosts") Hostnames or IP Addresses
         textarea(class="form-control" rows="5")
-      button.btn.btn-default(type='submit') Submit
+        p(class="form-control-static") One Address or Name per line
+      button.btn.btn-primary(type='submit') Submit
