@@ -1,10 +1,10 @@
 var express = require('express');
 var router  = express.Router();
 var a = require('../lib/auth.js');
-var modles = require('../modles');
+var models = require('../models');
 
 router.get('/', a.checkAuth, function(req, res) {
-	modles.HOST.findAll().complete(function(err, hosts){
+	models.HOST.findAll().complete(function(err, hosts){
 		if(err){
 			console.log(err);
 		}else{
