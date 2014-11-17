@@ -1,0 +1,2 @@
+GET hosts
+Columns: host_name state

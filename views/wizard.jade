@@ -20,3 +20,18 @@ block content
             ul.nav.navbar-nav.navbar-right
               li
                 a(href='#') #{ user }
+  div
+    form(role="form")
+      .form-group
+        .radio
+          label
+            input(type='radio' name='IPorName' id='setup_name' value='name')
+            Hostname
+        .radio
+          label
+            input(type='radio' name='IPorName' id='setup_ip' value='ip')
+            IP Address
+      .form-group
+        label(for="hosts") Hostnames or IP Addresses
+        textarea(class="form-control" rows="5")
+        
