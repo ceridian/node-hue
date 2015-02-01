@@ -328,7 +328,7 @@ var Utils = module.exports = {
     case 'lt':
       return '<';
     case 'eq':
-      return '=';
+      return val === null ? 'IS' : '=';
     case 'ne':
       return val === null ? 'IS NOT' : '!=';
     case 'between':
@@ -352,6 +352,8 @@ var Utils = module.exports = {
     case 'nilike':
     case 'notilike':
       return 'NOT ILIKE';
+    case 'overlap':
+      return '&&';
     default:
       return '';
     }
@@ -447,7 +449,7 @@ var Utils = module.exports = {
     if (omitNull) {
       var _hash = {};
 
-      Utils._.each(hash, function(val, key) {
+      Utils._.forIn(hash, function(val, key) {
         if (options.allowNull.indexOf(key) > -1 || key.match(/Id$/) || ((val !== null) && (val !== undefined))) {
           _hash[key] = val;
         }

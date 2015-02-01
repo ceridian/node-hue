@@ -1,3 +1,4 @@
+// modules
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,58 +7,80 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var l = require('./lib/lib.js');
+var a = require('./lib/auth.js');
 var app = express();
 
+// global
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+debugFlag = false;
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// settings
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'jfalajgiyiaog7a90g7a6gyaoyga7g0aygalyhga' }));
+app.use(session({
+    secret: 'jfalajgiyiaog7a90g7a6gyaoyga7g0aygalyhga',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
 var index = require('./routes/index');
+var hosts = require('./routes/hosts');
+var hostStatus = require('./routes/hostStatus');
+var statusDump = require('./routes/statusDump');
 var login = require('./routes/login');
+var dbs = require('./routes/dbs');
+var tables = require('./routes/tables');
+var configs = require('./routes/configs');
+var users = require('./routes/users');
+var columns = require('./routes/columns');
+var jobs = require('./routes/jobs');
+var jobDetail = require('./routes/jobDetail');
+var callback = require('./routes/callback');
 
 app.use('/', index);
+app.use('/hosts', hosts);
+app.use('/hostStatus', hostStatus);
+app.use('/statusDump', statusDump);
 app.use('/login', login);
+app.use('/dbs', dbs);
+app.use('/tables', tables);
+app.use('/configs', configs);
+app.use('/users', users);
+app.use('/columns', columns);
+app.use('/jobs', jobs);
+app.use('/jobDetail', jobDetail);
+app.use('/callback', callback);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.get('/404', function(req, res, next){
+  next();
+});
+
+// 404
+
+app.use(function(req, res, next){
+  res.redirect('/');
 });
 
 // error handlers
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  if(err){
+  	res.status(err.status || 500);
+  	res.send(err);
+  }else{
+    res.redirect('/');
+  }
 });
 
+setInterval(function(){
+  l.hostStatus(function(){
+    return;
+  });
+}, 10000);
 
 module.exports = app;
