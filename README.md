@@ -3,7 +3,7 @@ Simple webgui for querying hive.
 WIP
 
 ToDo:
-  1. clean up notifications
+  1. add hdfs browser
   2. and job detail view when clicked on
   3. logging functions
   4. clean and move angular front end
@@ -13,3 +13,4 @@ ToDo:
 Requirments:
   1. webhcat
   2. hive 0.12 <
+  3. webhdfs
