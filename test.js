@@ -10,7 +10,7 @@ var https = require('https');
 var fs = require('fs');
 
 function start(){
-  l.dirList("", function(err, obj){
+  l.dirList("/", function(err, obj){
     if(err){
       console.log('err', err);
     }else{
