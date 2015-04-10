@@ -9,6 +9,8 @@ var path = require('path');
 var https = require('https');
 var fs = require('fs');
 
+debugFlag = false;
+
 function start(){
   l.dirList("/", function(err, obj){
     if(err){
