@@ -134,7 +134,7 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, '../public', 'home.html'));
   });
 
-  router.get('/statusDump', a.checkAuth, function(req, res) {
+  app.get('/statusDump', a.checkAuth, function(req, res) {
     l.statusDump(function(err, conf){
       if(err){
         res.msg(err);
