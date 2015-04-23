@@ -3,7 +3,9 @@
 var http = require('http');
 var fs = require('fs');
 var debug = require('debug')('express-example');
-var app = require('../app');
+var a = require('../app');
+var app = a.app;
+var app2 = a.app2;
 var models = require("../models");
 var i = require('../lib/io.js');
 
