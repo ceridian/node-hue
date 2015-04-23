@@ -61,4 +61,4 @@ setInterval(function(){
   });
 }, 10000);
 
-module.exports = { app, app2 };
+module.exports = { 'app': app, 'app2': app2 };
