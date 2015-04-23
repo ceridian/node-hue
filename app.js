@@ -10,7 +10,7 @@ var session = require('express-session');
 var l = require('./lib/lib.js');
 var a = require('./lib/auth.js');
 var app = express();
-
+var app2 = express();
 // global
 
 debugFlag = false;
@@ -27,36 +27,11 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app2.use(logger('dev'));
+app2.use(bodyParser.json());
 
 require('./routes/routes.js')(app);
-// routes
-// var index = require('./routes/index');
-// var hosts = require('./routes/hosts');
-// var hostStatus = require('./routes/hostStatus');
-// var statusDump = require('./routes/statusDump');
-// var login = require('./routes/login');
-// var dbs = require('./routes/dbs');
-// var tables = require('./routes/tables');
-// var configs = require('./routes/configs');
-// var users = require('./routes/users');
-// var columns = require('./routes/columns');
-// var jobs = require('./routes/jobs');
-// var jobDetail = require('./routes/jobDetail');
-// var callback = require('./routes/callback');
-//
-// app.use('/', index);
-// app.use('/hosts', hosts);
-// app.use('/hostStatus', hostStatus);
-// app.use('/statusDump', statusDump);
-// app.use('/login', login);
-// app.use('/dbs', dbs);
-// app.use('/tables', tables);
-// app.use('/configs', configs);
-// app.use('/users', users);
-// app.use('/columns', columns);
-// app.use('/jobs', jobs);
-// app.use('/jobDetail', jobDetail);
-// app.use('/callback', callback);
+require('./routes/httpRoutes.js')(app2);
 
 
 app.get('/404', function(req, res, next){
