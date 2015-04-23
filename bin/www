@@ -21,15 +21,18 @@ models.sequelize.sync().complete(function(err) {
 	if(err){
 		console.log(err);
 	}else{
-		//var server = https.createServer(options, app);
-		var server = http.createServer(app);
+		var server = https.createServer(options, app);
+		//var server = http.createServer(app);
 		io = require("socket.io").listen(server);
-		//server.listen(443);
-		server.listen(3000);
+		server.listen(443);
+		//server.listen(3000);
+
+		var server2 = http.createServer(app2);
+		server2.listen(3000);
 		io.on('connection', function(socket){
-			console.log('connected');
+			console.log('connected io');
 
 		});
-		console.log('3000');
+		console.log('443');
 	}
 });
