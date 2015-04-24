@@ -3,7 +3,8 @@ var l = require('../lib/lib.js');
 // global variables
 debugFlag = false;
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+//jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+jasmine.getEnv().defaultTimeoutInterval = 60000;
 
 describe('configs()', function(){
 	it('should return config object', function(done){

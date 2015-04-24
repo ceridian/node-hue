@@ -55,10 +55,11 @@ app.use(function(err, req, res, next) {
   }
 });
 
-setInterval(function(){
-  l.hostStatus(function(){
-    return;
-  });
-}, 10000);
+// status of hosts
+// setInterval(function(){
+//   l.hostStatus(function(){
+//     return;
+//   });
+// }, 10000);
 
 module.exports = { 'app': app, 'app2': app2 };
