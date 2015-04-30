@@ -233,7 +233,8 @@
 				.scaleExtent([1, 10])
 				.on("zoom", zoomed);
 
-			var svg = d3.select("body").append("svg")
+			//var svg = d3.select("body").append("svg")
+			var svg = d3.select("#graph").append("svg")
 				.call(zoom)
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
