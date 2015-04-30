@@ -32,6 +32,10 @@
 				controller: 'SettingsSetup',
 				controllerAs: 'settings'
 			})
+			.when('/app/hdfs', {
+				templateUrl: 'temps/hdfs-setup.html',
+				controller: 'HdfsSetup',
+			})
 			.otherwise({
 				templateUrl: 'temps/login-setup.html',
 				controller: 'LoginSetup',
@@ -484,6 +488,103 @@
 		}).error(function(data){
 			console.log(data);
 		});
+	}]);
+
+	app.controller('HdfsSetup', ['$scope', '$http', function($scope, $http){
+		this.name = 'HDFS';
+		$scope.$emit('LOAD');
+		$http.post('/dir', {dir: '/'}).success(function(data){
+			console.log(data);
+			$scope.$emit('UNLOAD');
+			var hold = {};
+			data.forEach(function(v){
+				$scope[v] = false;
+				//$scope[v+'Tables'] = [];
+				var obj = {};
+				obj.name = v;
+				obj.children = {};
+				hold[v] = obj;
+			});
+			$scope.hive = hold;
+		}).error(function(data){
+			console.log(data);
+		});
+
+		var editor = ace.edit("editor");
+		editor.getSession().setMode("ace/mode/sql");
+
+		$scope.query = function(){
+			var q = editor.getValue();
+			var str = q.replace(/\ /g, '+');
+			console.log(str);
+			$http.post('/callback', {str: str}).success(function(res){
+				console.log(res);
+			}).error(function(err){
+				console.log(err);
+			});
+		}
+
+		$scope.clicked = function(data){
+			var db = data.name;
+			$scope.selected = db;
+			if($scope[db] == false){
+				console.log('true');
+				$scope[db] = true;
+				$scope.$emit('LOAD');
+				$http.post('/tables', {db: db}).success(function(tables){
+					var hold = {};
+					$scope.$emit('UNLOAD');
+					console.log(tables);
+					if(tables){
+						var hold = {};
+						tables.forEach(function(v){
+							var obj = {};
+							obj.name = v;
+							obj.columns = {};
+							$scope[db+'_'+v] = false;
+							hold[v] = obj;
+						});
+						$scope.hive[db].children = hold;
+					}else{
+						$scope.hive[db].children = {Empty: {name: 'Empty'}};
+					}
+				}).error(function(err){
+					console.log(err);
+				});
+			}else{
+				console.log('false');
+				$scope[db] = false;
+			}
+		};
+
+		$scope.table = function(d, t){
+			var db = d.name;
+			var tab = t.name;
+			$scope.$emit('LOAD');
+			$scope.selected = db+'_'+tab;
+			console.log(db, tab);
+			$http.post('/columns', {db: db, tab: tab}).success(function(cols){
+				console.log(cols);
+				$scope.$emit('UNLOAD');
+				$scope.columns = cols.columns;
+				var keys = Object.keys(cols);
+				console.log(keys);
+				var hold = [];
+				keys.forEach(function(v){
+					if(v == 'columns'){
+
+					}else{
+						var obj = {};
+						obj.key = v;
+						obj.value = cols[v];
+						hold.push(obj);
+					}
+				});
+				$scope.info = hold;
+			}).error(function(err){
+				console.log(err);
+			});
+		};
 	}]);
 
 	app.controller('HiveSetup', ['$scope', '$http', function($scope, $http){
