@@ -493,6 +493,7 @@
 	app.controller('HdfsSetup', ['$scope', '$http', function($scope, $http){
 		this.name = 'HDFS';
 		$scope.$emit('LOAD');
+		console.log(this.name);
 		$http.post('/dir', {dir: '/'}).success(function(data){
 			console.log(data);
 			$scope.$emit('UNLOAD');
