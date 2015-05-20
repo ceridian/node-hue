@@ -169,7 +169,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/', a.checkAuth, function(req, res) {
+  app.get('/dir', a.checkAuth, function(req, res) {
     var body = req.body;
     console.log(body);
     var dir = body.dir;
