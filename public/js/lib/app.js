@@ -505,7 +505,11 @@
 				//$scope[v+'Tables'] = [];
 				var obj = {};
 				obj.name = v.pathSuffix;
-				obj.type = v.type;
+				if(v.type = "DIRECTORY"){
+					obj.dir = true;
+				}else{
+					obj.dir = false;
+				}
 				obj.children = {};
 				hold[v.pathSuffix] = obj;
 			});

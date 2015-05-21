@@ -11,16 +11,26 @@
 				<ul>
 					<li ng-repeat="d in hdfs">
 						<div>
-							<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.name}}">
-								<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
-								<img ng-switch-when=false ng-src="css/png/glyphicons_440_folder_closed.png"></img>
-								{{d.name}}
-							</span>
-							<ul ng-show="{{d.name}}">
-								<li ng-repeat="t in d.children">
-									<span id="{{d.name}}_{{t.name}}" ng-click="table(d, t)" class="treeTable">{{t.name}}</span>
-								</li>
-							</ul>
+							<dir ng-switch on="{{d.dir}}">
+								<dir ng-switch-when=true>
+									<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.name}}">
+										<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
+										<img ng-switch-when=false ng-src="css/png/glyphicons_440_folder_closed.png"></img>
+										{{d.name}}
+									</span>
+									<ul ng-show="{{d.name}}">
+										<li ng-repeat="t in d.children">
+											<span id="{{d.name}}_{{t.name}}" ng-click="table(d, t)" class="treeTable">{{t.name}}</span>
+										</li>
+									</ul>
+								</dir>
+								<dir ng-switch-when=false>
+									<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB">
+										<img ng-switch-when=false ng-src="css/png/glyphicons_036_file.png"></img>
+										{{d.name}}
+									</span>
+								</dir>
+							</dir>
 						</div>
 					</li>
 				</ul>
