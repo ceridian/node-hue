@@ -515,23 +515,65 @@
 					obj.dir = false;
 				}
 				obj.children = {};
+				var hold2 = [];
+				var keys = Object.keys(v);
+				keys.forEach(function(v2){
+					var o = {};
+					o.key = v2;
+					o.value = v[v2];
+					hold2.push(o);
+					console.log(v2)
+				});
+				obj.info = hold2;
 				hold[id] = obj;
 			});
 			console.log(hold);
 			$scope.hdfs = hold;
 		}).error(function(data){
+			$scope.$emit('UNLOAD');
 			console.log(data);
 		});
 
 		$scope.clicked = function(data){
 			console.log(data);
 			var id = data.id;
+			var name = data.name
 			$scope.selected = id;
 			if($scope[id] == false){
 				console.log('true');
 				$scope[id] = true;
+				$scope.$emit('LOAD');
+				$http.post('/dir', {dir: name}).success(function(data){
+					$scope.$emit('UNLOAD');
+					console.log(data);
+					var hold = {};
+					var arr = data.FileStatuses.FileStatus;
+					arr.forEach(function(v){
+						var name = v.pathSuffix;
+						var id2 = name.replace(/-/g, '');
+						var id3 = id+'_'+id2
+						console.log(id3);
+						$scope[id3] = false;
+						var obj = {};
+						obj.name = name;
+						obj.id = id3;
+						if(v.type = "DIRECTORY"){
+							obj.dir = true;
+						}else{
+							obj.dir = false;
+						}
+						obj.info = v;
+						obj.children = {};
+						hold[id3] = obj;
+					});
+					console.log(hold);
+					$scope.hdfs[id].children = hold;
+				}).error(function(data){
+					$scope.$emit('UNLOAD');
+					console.log(data);
+				});
 				//$scope.$emit('LOAD');
-				
+
 				/*$http.post('/tables', {db: db}).success(function(tables){
 					var hold = {};
 					$scope.$emit('UNLOAD');
