@@ -536,11 +536,9 @@
 		this.name = 'HDFS';
 		$scope.$emit('LOAD');
 		$http.post('/dir', {dir: '/'}).success(function(data){
-			console.log(data);
 			$scope.$emit('UNLOAD');
 			var hold = [];
 			var arr = data.FileStatuses.FileStatus;
-			console.log(arr);
 			$scope.root = false;
 			arr.forEach(function(v){
 				var name = v.pathSuffix;
@@ -568,12 +566,12 @@
 				obj.info = hold2;
 				hold.push(obj);
 			});
-			console.log(hold);
 			var par = {};
 			par.name = 'File Directory';
 			par.id = 'root';
 			par.dir = true;
 			par.children = hold;
+			console.log(par);
 			$scope.hdfs = hold;
 		}).error(function(data){
 			$scope.$emit('UNLOAD');

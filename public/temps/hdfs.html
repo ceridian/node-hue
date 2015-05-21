@@ -1,7 +1,7 @@
 <span id="{{treeData.id}}" class="treeDB" ng-switch on="{{treeData.id}}">
   <img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
   <img ng-switch-default ng-src="css/png/glyphicons_440_folder_closed.png"></img>
-  {{treeData.name}}
+  {{treeData}}
 </span>
 <ul ng-show="{{treeData.id}}">
   <li ng-repeat="child in treeData.children">
