@@ -585,7 +585,7 @@
 			par.dir = true;
 			par.children = hold;
 			console.log(par);
-			$scope.hdfs = hold;
+			$scope.hdfs = par;
 		}).error(function(data){
 			$scope.$emit('UNLOAD');
 			console.log(data);
