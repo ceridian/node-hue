@@ -524,13 +524,15 @@
 		});
 
 		$scope.clicked = function(data){
-			var db = data.name;
-			$scope.selected = db;
-			if($scope[db] == false){
+			console.log(data);
+			var id = data.id;
+			$scope.selected = id;
+			if($scope[id] == false){
 				console.log('true');
-				$scope[db] = true;
-				$scope.$emit('LOAD');
-				$http.post('/tables', {db: db}).success(function(tables){
+				$scope[id] = true;
+				//$scope.$emit('LOAD');
+				
+				/*$http.post('/tables', {db: db}).success(function(tables){
 					var hold = {};
 					$scope.$emit('UNLOAD');
 					console.log(tables);
@@ -549,10 +551,10 @@
 					}
 				}).error(function(err){
 					console.log(err);
-				});
+				});*/
 			}else{
 				console.log('false');
-				$scope[db] = false;
+				$scope[id] = false;
 			}
 		};
 
