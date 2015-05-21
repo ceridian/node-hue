@@ -8,7 +8,7 @@ router.get('/', a.checkAuth, function(req, res) {
   var dir = req.body.dir;
   console.log(dir);
   console.log(req.body);
-  l.dbs(dir, function(err, conf){
+  l.dirList(dir, function(err, conf){
     if(err){
       console.log(err);
       res.status(500).end();
