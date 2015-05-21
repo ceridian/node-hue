@@ -10,7 +10,9 @@
 
 			<div class="tree" ng-controller="HdfsSetup">
 				<script type="text/ng-template" id="tree">
-					{{ node.name }}
+					<span class="treeDB">
+						{{ node.name }}
+					</span>
 					<ul ng-if="node.children">
 						<li ng-repeat="node in node.children" ng-include="tree"></li>
 					</ul>
