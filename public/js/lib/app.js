@@ -350,7 +350,7 @@
 				obj.info = hold2;
 				hold.push(obj);
 			});
-			$scope.hdfs = hold;
+			$scope.children = hold;
 		}).error(function(data){
 			$scope.$emit('UNLOAD');
 			console.log(data);
