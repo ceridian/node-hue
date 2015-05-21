@@ -61,6 +61,48 @@
 		});
 	});
 
+	app.factory('RecursionHelper', ['$compile', function($compile){
+		return {
+			/**
+			 * Manually compiles the element, fixing the recursion loop.
+			 * @param element
+			 * @param [link] A post-link function, or an object with function(s) registered via pre and post properties.
+			 * @returns An object containing the linking functions.
+			 */
+			compile: function(element, link){
+				// Normalize the link parameter
+				if(angular.isFunction(link)){
+					link = { post: link };
+				}
+
+				// Break the recursion loop by removing the contents
+				var contents = element.contents().remove();
+				var compiledContents;
+				return {
+					pre: (link && link.pre) ? link.pre : null,
+					/**
+					 * Compiles and re-adds the contents
+					 */
+					post: function(scope, element){
+						// Compile the contents
+						if(!compiledContents){
+							compiledContents = $compile(contents);
+						}
+						// Re-add the compiled contents to the element
+						compiledContents(scope, function(clone){
+							element.append(clone);
+						});
+
+						// Call the post-linking function, if any
+						if(link && link.post){
+							link.post.apply(null, arguments);
+						}
+					}
+				};
+			}
+		};
+	});
+
 	app.factory('socket', ['$rootScope', function ($rootScope) {
 		var socket = io.connect();
 		return {
@@ -493,19 +535,18 @@
 	app.controller('HdfsSetup', ['$scope', '$http', function($scope, $http){
 		this.name = 'HDFS';
 		$scope.$emit('LOAD');
-		console.log(this.name);
 		$http.post('/dir', {dir: '/'}).success(function(data){
 			console.log(data);
 			$scope.$emit('UNLOAD');
-			var hold = {};
+			var hold = [];
 			var arr = data.FileStatuses.FileStatus;
 			console.log(arr);
+			$scope.root = false;
 			arr.forEach(function(v){
 				var name = v.pathSuffix;
 				var id = name.replace(/-/g, '');
 				console.log(id);
 				$scope[id] = false;
-				//$scope[v+'Tables'] = [];
 				var obj = {};
 				obj.name = name;
 				obj.id = id;
@@ -514,7 +555,8 @@
 				}else{
 					obj.dir = false;
 				}
-				obj.children = {};
+				obj.children = [];
+				obj.parent = '/';
 				var hold2 = [];
 				var keys = Object.keys(v);
 				keys.forEach(function(v2){
@@ -524,16 +566,21 @@
 					hold2.push(o);
 				});
 				obj.info = hold2;
-				hold[id] = obj;
+				hold.push(obj);
 			});
 			console.log(hold);
+			var par = {};
+			par.name = 'File Directory';
+			par.id = 'root';
+			par.dir = true;
+			par.children = hold;
 			$scope.hdfs = hold;
 		}).error(function(data){
 			$scope.$emit('UNLOAD');
 			console.log(data);
 		});
 
-		$scope.clicked = function(data){
+		/*$scope.clicked = function(data){
 			console.log(data);
 			var id = data.id;
 			var name = data.name;
@@ -571,6 +618,7 @@
 							o.value = v[v2];
 							hold2.push(o);
 						});
+						obj.parent = id;
 						obj.info = hold2;
 						obj.children = {};
 						hold[id3] = obj;
@@ -583,7 +631,7 @@
 				});
 				//$scope.$emit('LOAD');
 
-				/*$http.post('/tables', {db: db}).success(function(tables){
+				$http.post('/tables', {db: db}).success(function(tables){
 					var hold = {};
 					$scope.$emit('UNLOAD');
 					console.log(tables);
@@ -602,14 +650,14 @@
 					}
 				}).error(function(err){
 					console.log(err);
-				});*/
+				});
 			}else{
 				console.log('false');
 				$scope[id] = false;
 			}
-		};
+		};*/
 
-		$scope.table = function(d, t){
+		/*$scope.table = function(d, t){
 			var db = d.name;
 			var tab = t.name;
 			$scope.$emit('LOAD');
@@ -636,8 +684,22 @@
 			}).error(function(err){
 				console.log(err);
 			});
-		};
+		};*/
 	}]);
+
+	app.directive("tree", function(RecursionHelper){
+		return {
+			restrict: "E",
+			scope: {treeData: '='}
+			templateUrl: "temps/hdfs.html",
+			compile: function(element){
+				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
+
+				});
+			}
+		}
+	});
+
 
 	app.controller('HiveSetup', ['$scope', '$http', function($scope, $http){
 		this.name = 'Hive';

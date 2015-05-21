@@ -7,8 +7,10 @@
 	<div class="container">
 		<div style="float:left;">
 			<h5> File System </h5>
-			<div class="tree">
-				<ul>
+
+			<div class="tree" ng-controller="HdfsSetup">
+				<tree treeData="hdfs"></tree>
+			<!--<ul>
 					<li ng-repeat="d in hdfs">
 						<div>
 							<dir ng-switch on="{{d.dir}}">
@@ -20,7 +22,7 @@
 									</span>
 									<ul ng-show="{{d.id}}">
 										<li ng-repeat="t in d.children">
-											<span id="{{d.id}}_{{t.name}}" ng-click="table(d, t)" class="treeTable">{{t.name}}</span>
+											<span id="{{t.id}}" ng-click="clicked(t)" class="treeTable">{{t.name}}</span>
 										</li>
 									</ul>
 								</dir>
@@ -33,26 +35,9 @@
 							</dir>
 						</div>
 					</li>
-				</ul>
+				</ul>-->
 			</div>
 		</div>
-		<!--<div class='columns'>
-			<h5>Columns</h5>
-			<table style="width:100%;" class="basicTable">
-				<thead>
-					<tr>
-						<td>Name</td>
-						<td>Type</td>
-					</tr>
-				</thead>
-				<tbody ng-repeat="r in columns">
-					<tr>
-						<td>{{r.name}}</td>
-						<td>{{r.type}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>-->
 		<div class="info">
 			<h5>Info</h5>
 			<table style="width:100%;" class="basicTable">
