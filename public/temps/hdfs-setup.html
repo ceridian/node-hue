@@ -9,7 +9,16 @@
 			<h5> File System </h5>
 
 			<div class="tree" ng-controller="HdfsSetup">
+				<script type="text/ng-template" id="tree">
+					{{ node.name }}
+					<ul ng-if="node.children">
+						<li ng-repeat="node in node.children" ng-include="tree"></li>
+					</ul>
+				</script>
 				<ul>
+					<li ng-repeat="node in hdfs" ng-include="tree"></li>
+				</ul>
+				<!--<ul>
 					<li ng-repeat="node in hdfs">
 						<div ng-switch on="{{node.dir}}">
 							<div ng-switch-when=true>
@@ -21,7 +30,7 @@
 							</div>
 						</div>
 					</li>
-				</ul>
+				</ul>-->
 				<!--<tree treeData="hdfs"></tree>
 				<ul>
 					<li ng-repeat="d in hdfs">
