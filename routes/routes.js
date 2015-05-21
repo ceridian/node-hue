@@ -174,7 +174,7 @@ module.exports = function(app) {
     console.log(body);
     var dir = body.dir;
     console.log(dir);
-    l.dbs(dir, function(err, conf){
+    l.dirList(dir, function(err, conf){
       if(err){
         console.log(err);
         res.status(500).end();
