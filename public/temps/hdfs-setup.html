@@ -12,8 +12,9 @@
 				<script type="text/ng-template" id="tree">
 					<div ng-switch on="{{node.dir}}">
 						<dir ng-switch-when=true>
-							<span class="treeDB">
-								<img ng-src="css/png/glyphicons_144_folder_open.png"></img>
+							<span id="{{node.id}}" class="treeDB" ng-switch on="{{node.id}}">
+								<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
+								<img ng-switch-default ng-src="css/png/glyphicons_440_folder_closed.png"></img>
 								{{ node.name }}
 							</span>
 							<ul ng-if="node.children">
