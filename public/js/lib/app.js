@@ -127,7 +127,7 @@
 		};
 	}]);
 
-	app.directive("tree", function(RecursionHelper){
+	app.directive("tree", function(){
 		return {
 			restrict: "E",
 			scope: {treeData: '=treeData'},
