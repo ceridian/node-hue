@@ -507,7 +507,7 @@
 				obj.name = v.pathSuffix;
 				obj.type = v.type;
 				obj.children = {};
-				hold[v] = obj;
+				hold[v.pathSuffix] = obj;
 			});
 			console.log(hold);
 			$scope.hdfs = hold;
