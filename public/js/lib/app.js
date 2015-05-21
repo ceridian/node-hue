@@ -504,6 +504,7 @@
 				$scope[v.pathSuffix] = false;
 				//$scope[v+'Tables'] = [];
 				var obj = {};
+				obj.id = v.pathSuffix.replace(/-/g, '');
 				obj.name = v.pathSuffix;
 				if(v.type = "DIRECTORY"){
 					obj.dir = true;

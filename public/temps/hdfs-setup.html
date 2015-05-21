@@ -13,19 +13,19 @@
 						<div>
 							<dir ng-switch on="{{d.dir}}">
 								<dir ng-switch-when=true>
-									<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.name}}">
+									<span id="{{d.id}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.id}}">
 										<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
 										<img ng-switch-default ng-src="css/png/glyphicons_440_folder_closed.png"></img>
 										{{d.name}}
 									</span>
-									<ul ng-show="{{d.name}}">
+									<ul ng-show="{{d.id}}">
 										<li ng-repeat="t in d.children">
-											<span id="{{d.name}}_{{t.name}}" ng-click="table(d, t)" class="treeTable">{{t.name}}</span>
+											<span id="{{d.id}}_{{t.name}}" ng-click="table(d, t)" class="treeTable">{{t.name}}</span>
 										</li>
 									</ul>
 								</dir>
 								<dir ng-switch-when=false>
-									<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB">
+									<span id="{{d.id}}" ng-click="clicked(d)" class="treeDB">
 										<img ng-switch-when=false ng-src="css/png/glyphicons_036_file.png"></img>
 										{{d.name}}
 									</span>
@@ -54,7 +54,7 @@
 			</table>
 		</div>-->
 		<div class="info">
-			<h5>Table Info</h5>
+			<h5>Info</h5>
 			<table style="width:100%;" class="basicTable">
 				<thead>
 					<tr>
