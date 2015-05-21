@@ -503,7 +503,8 @@
 				$scope[v] = false;
 				//$scope[v+'Tables'] = [];
 				var obj = {};
-				obj.name = v;
+				obj.name = v.pathSuffix;
+				obj.type = v.type;
 				obj.children = {};
 				hold[v] = obj;
 			});
