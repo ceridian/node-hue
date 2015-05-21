@@ -85,13 +85,13 @@
 		};
 	}]);
 
-	app.directive("tree", function(){
+	/*app.directive("tree", function(){
 		return {
 			restrict: "E",
 			scope: {treeData: '=treeData'},
 			templateUrl: "temps/hdfs.html",
 		}
-	});
+	});*/
 
 	app.directive('mainView', function(){
 		return {
