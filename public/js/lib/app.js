@@ -501,7 +501,7 @@
 			var arr = data.FileStatuses.FileStatus;
 			console.log(arr);
 			arr.forEach(function(v){
-				$scope[v] = false;
+				//$scope[v] = false;
 				//$scope[v+'Tables'] = [];
 				var obj = {};
 				obj.name = v.pathSuffix;
@@ -509,7 +509,8 @@
 				obj.children = {};
 				hold[v] = obj;
 			});
-			$scope.hive = hold;
+			console.log(hold);
+			$scope.hdfs = hold;
 		}).error(function(data){
 			console.log(data);
 		});
