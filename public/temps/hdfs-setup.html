@@ -12,8 +12,8 @@
 					<li ng-repeat="d in hdfs">
 						<div>
 							<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.name}}">
-								<img ng-switch-when=true ng-src="css/png/glyphicons_142_database_minus.png"></img>
-								<img ng-switch-when=false ng-src="css/png/glyphicons_141_database_plus.png"></img>
+								<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
+								<img ng-switch-when=false ng-src="css/png/glyphicons_440_folder_closed.png"></img>
 								{{d.name}}
 							</span>
 							<ul ng-show="{{d.name}}">

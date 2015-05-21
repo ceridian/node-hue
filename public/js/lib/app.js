@@ -501,7 +501,7 @@
 			var arr = data.FileStatuses.FileStatus;
 			console.log(arr);
 			arr.forEach(function(v){
-				//$scope[v] = false;
+				$scope[v.pathSuffix] = false;
 				//$scope[v+'Tables'] = [];
 				var obj = {};
 				obj.name = v.pathSuffix;
