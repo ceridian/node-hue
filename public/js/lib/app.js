@@ -499,6 +499,7 @@
 			$scope.$emit('UNLOAD');
 			var hold = {};
 			var arr = data.FileStatuses.FileStatus;
+			console.log(arr);
 			arr.forEach(function(v){
 				$scope[v] = false;
 				//$scope[v+'Tables'] = [];
