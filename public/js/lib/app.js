@@ -522,7 +522,6 @@
 					o.key = v2;
 					o.value = v[v2];
 					hold2.push(o);
-					console.log(v2)
 				});
 				obj.info = hold2;
 				hold[id] = obj;
@@ -537,7 +536,9 @@
 		$scope.clicked = function(data){
 			console.log(data);
 			var id = data.id;
-			var name = data.name
+			var name = data.name;
+			var info = data.info;
+			$scope.info = info;
 			$scope.selected = id;
 			if($scope[id] == false){
 				console.log('true');
@@ -562,7 +563,15 @@
 						}else{
 							obj.dir = false;
 						}
-						obj.info = v;
+						var hold2 = [];
+						var keys = Object.keys(v);
+						keys.forEach(function(v2){
+							var o = {};
+							o.key = v2;
+							o.value = v[v2];
+							hold2.push(o);
+						});
+						obj.info = hold2;
 						obj.children = {};
 						hold[id3] = obj;
 					});
