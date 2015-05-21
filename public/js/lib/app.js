@@ -101,7 +101,7 @@
 				};
 			}
 		};
-	});
+	}]);
 
 	app.factory('socket', ['$rootScope', function ($rootScope) {
 		var socket = io.connect();
