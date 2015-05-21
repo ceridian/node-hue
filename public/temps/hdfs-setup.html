@@ -10,12 +10,23 @@
 
 			<div class="tree" ng-controller="HdfsSetup">
 				<script type="text/ng-template" id="tree">
-					<span class="treeDB">
-						{{ node.name }}
-					</span>
-					<ul ng-if="node.children">
-						<li ng-repeat="node in node.children" ng-include="tree"></li>
-					</ul>
+					<div ng-switch on="{{node.dir}}">
+						<dir ng-switch-when=true>
+							<span class="treeDB">
+								<img ng-src="css/png/glyphicons_144_folder_open.png"></img>
+								{{ node.name }}
+							</span>
+							<ul ng-if="node.children">
+								<li ng-repeat="node in node.children" ng-include="tree"></li>
+							</ul>
+						</div>
+					</div>
+					<dir ng-switch-when=false>
+						<span class="treeDB">
+							<img ng-switch-when=false ng-src="css/png/glyphicons_036_file.png"></img>
+							{{node.name}}
+						</span>
+					</dir>
 				</script>
 				<ul>
 					<li ng-repeat="node in children" ng-include="'tree'"></li>
