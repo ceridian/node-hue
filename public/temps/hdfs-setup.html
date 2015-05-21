@@ -15,7 +15,7 @@
 								<dir ng-switch-when=true>
 									<span id="{{d.name}}" ng-click="clicked(d)" class="treeDB" ng-switch on="{{d.name}}">
 										<img ng-switch-when=true ng-src="css/png/glyphicons_144_folder_open.png"></img>
-										<img ng-switch-when=false ng-src="css/png/glyphicons_440_folder_closed.png"></img>
+										<img ng-switch-default ng-src="css/png/glyphicons_440_folder_closed.png"></img>
 										{{d.name}}
 									</span>
 									<ul ng-show="{{d.name}}">
@@ -36,7 +36,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class='columns'>
+		<!--<div class='columns'>
 			<h5>Columns</h5>
 			<table style="width:100%;" class="basicTable">
 				<thead>
@@ -52,7 +52,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</div>-->
 		<div class="info">
 			<h5>Table Info</h5>
 			<table style="width:100%;" class="basicTable">
