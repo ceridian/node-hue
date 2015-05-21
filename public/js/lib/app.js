@@ -501,10 +501,12 @@
 			var arr = data.FileStatuses.FileStatus;
 			console.log(arr);
 			arr.forEach(function(v){
-				$scope[v.pathSuffix] = false;
+				var name = v.pathSuffix;
+				var id = name.replace(/-/g, '');
+				console.log(id);
+				$scope[id] = false;
 				//$scope[v+'Tables'] = [];
 				var obj = {};
-				obj.id = v.pathSuffix.replace(/-/g, '');
 				obj.name = v.pathSuffix;
 				if(v.type = "DIRECTORY"){
 					obj.dir = true;
@@ -512,7 +514,7 @@
 					obj.dir = false;
 				}
 				obj.children = {};
-				hold[v.pathSuffix] = obj;
+				hold[id] = obj;
 			});
 			console.log(hold);
 			$scope.hdfs = hold;
