@@ -9,8 +9,11 @@
 			<h5> File System </h5>
 
 			<div class="tree" ng-controller="HdfsSetup">
-				<tree treeData="hdfs"></tree>
-			<!--<ul>
+				<ul>
+					<li ng-repeat="node in hdfs">{{ node.name }}</li>
+				</ul>
+				<!--<tree treeData="hdfs"></tree>
+				<ul>
 					<li ng-repeat="d in hdfs">
 						<div>
 							<dir ng-switch on="{{d.dir}}">
