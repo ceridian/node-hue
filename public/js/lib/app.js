@@ -130,7 +130,7 @@
 	app.directive("tree", function(RecursionHelper){
 		return {
 			restrict: "E",
-			scope: {treeData: '='},
+			scope: {treeData: '=treeData'},
 			templateUrl: "temps/hdfs.html",
 			compile: function(element){
 				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
