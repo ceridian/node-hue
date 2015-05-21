@@ -127,6 +127,19 @@
 		};
 	}]);
 
+	app.directive("tree", function(RecursionHelper){
+		return {
+			restrict: "E",
+			scope: {treeData: '='},
+			templateUrl: "temps/hdfs.html",
+			compile: function(element){
+				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
+
+				});
+			}
+		}
+	});
+
 	app.directive('mainView', function(){
 		return {
 			restrict: 'E',
@@ -684,19 +697,6 @@
 			});
 		};*/
 	}]);
-
-	app.directive("tree", function(RecursionHelper){
-		return {
-			restrict: "E",
-			scope: {treeData: '='},
-			templateUrl: "temps/hdfs.html",
-			compile: function(element){
-				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
-
-				});
-			}
-		}
-	});
 
 
 	app.controller('HiveSetup', ['$scope', '$http', function($scope, $http){
